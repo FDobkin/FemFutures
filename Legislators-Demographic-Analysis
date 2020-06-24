@@ -26,3 +26,11 @@ leg1 <- leg1[,-c(7:8)]
 order <- c("official_full_name","bioguide_id","party","type","state",
            "birthday_bio","gender_bio","religion_bio")
 leg1 <- leg1[,order]
+leg2 %>% leg1
+  rename(
+    c(name = "official_full_name",
+    id = "bioguide_id",
+    dob = "birthday_bio",
+    gender = "gender_bio",
+    religion = "religion_bio"
+  ))
