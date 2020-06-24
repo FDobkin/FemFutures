@@ -45,3 +45,6 @@ count(is.na(leg_complete$gender))
 count(is.na(leg_complete$religion))
 count(is.na(leg_complete$age))
 
+#Identify specific cases (only 351 and 430)
+which(is.na(leg_complete$age))
+
