@@ -1,0 +1,38 @@
+#Bar Chart
+read_csv("hisp_lat.csv")
+read_csv("afr_black.csv")
+read_csv("white.csv")
+
+library(ggplot2)
+library(plotly)
+library(tidyverse)
+
+fem_inc <- merge(hisp_lat, afr_black, by="date")
+fem_inc <- merge(fem_inc,white, by="date")
+fem_inc <- fem_inc[-c(41),]
+View(fem_inc)
+
+r <- ggplot(fem_inc, aes(x=date)) +
+            geom_line(aes(y=hispanic_latino, group=1, col="Hispanic or Latino")) +
+            geom_line(aes(y=afr_black, group=1, col="African or Black")) +
+            geom_line(aes(y=white, group=1, col="White")) + 
+            labs(title="Female Unemployment Rate by Ethnicity",
+                 subtitle="1980 to 2019",
+                 caption="Source: Bureau of Labor Statistics",
+                 x="Year",
+                 y="Unemployment %") +
+            scale_x_discrete(breaks=c("1980","1985", "1990", "1995",
+                                      "2000", "2005", "2010", "2015"),
+                             labels=c("1980","1985", "1990", "1995",
+                                      "2000", "2005", "2010", "2015")) +
+   theme(plot.title=element_text(size=10, face="bold"),
+         plot.subtitle=element_text(size=8, face="italic"),
+         plot.caption=element_text(size=8),
+         axis.title=element_text(size=9, face="bold"),
+         axis.text.y=element_text(size = 8, face="bold"),
+         axis.ticks.y=element_blank(),
+         axis.text.x=element_text(size = 8, face="bold"),
+         axis.ticks.x=element_blank(),
+         panel.background = element_blank(),
+         legend.title = element_text(size = 9, face = "bold"),
+         axis.line = element_line(colour = "black"))  
