@@ -38,3 +38,10 @@ leg_complete %>% leg1
   mutate(age= (today() - as.Date(dob))/365) 
 leg1 <- format(leg_complete$age, digits=2, nsmall=2)
 
+#In order to replace religion NAs, we must identify other NAs within the dataset and place values in manually.
+count(is.na(leg_complete$state))
+count(is.na(leg_complete$dob))
+count(is.na(leg_complete$gender))
+count(is.na(leg_complete$religion))
+count(is.na(leg_complete$age))
+
