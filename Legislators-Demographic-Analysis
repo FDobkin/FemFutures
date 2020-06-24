@@ -1,0 +1,28 @@
+#Upload data
+legislators <- read_csv("~/Desktop/legislators.csv")
+comp <- read_csv("~/Desktop/comp.csv")
+
+#Clean legislators
+legislators <- legislators[,-c(1,4:5, 8:11, 13:16, 18, 20:24)]
+col_order <- c("official_full_name","bioguide_id","birthday_bio","first_name",
+               "last_name","gender_bio","religion_bio")
+legislators <- legislators[,col_order]
+
+#Clean comp
+comp_clean <- comp[,-c(1,3:7,9:12,14:17,20:21,23)]
+#This dataset has rows for each term of service. It does have the same number of bioguides as the legislators set.
+library(tidyverse)
+comp_clean <- as_tibble(comp_clean)
+comp_clean %>%
+  count(duplicated(comp_clean$bioguide)) 
+comp_new <- comp_clean %>%
+  filter(end >= "2019-01-03") 
+names(comp_new)[names(comp_new)=="bioguide"] <- "bioguide_id"
+
+#Create new dataset
+leg_complete <- merge(comp_new, legislators, by="bioguide_id")
+leg1 <- leg_complete[,-c(2,4)]
+leg1 <- leg1[,-c(7:8)]
+order <- c("official_full_name","bioguide_id","party","type","state",
+           "birthday_bio","gender_bio","religion_bio")
+leg1 <- leg1[,order]
