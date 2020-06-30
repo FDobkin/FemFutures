@@ -36,8 +36,8 @@ leg_complete %>% leg1
   ))
   leg_complete <- leg_complete %>%
   mutate(age= (today() - as.Date(dob))/365) 
-leg1 <- format(leg_complete$age, digits=2, nsmall=2)
-leg_complete <- leg1$religion[leg_complete1$religion==NA] <- "Unknown"
+leg_complete <- format(leg_complete$age, digits=2, nsmall=2)
+leg_complete <- leg_complete$religion[leg_complete$religion==NA] <- "Unknown"
 
 #Identify any other NAs
 count(is.na(leg_complete$state))
