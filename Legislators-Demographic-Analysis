@@ -19,14 +19,14 @@ comp_new <- comp_clean %>%
   filter(end >= "2019-01-03") 
 names(comp_new)[names(comp_new)=="bioguide"] <- "bioguide_id"
 
-#Create new dataset
+#Merge datasets
 leg_complete <- merge(comp_new, legislators, by="bioguide_id")
-leg1 <- leg_complete[,-c(2,4)]
-leg1 <- leg1[,-c(7:8)]
+leg_complete <- leg_complete[,-c(2,4)]
+leg_complete <- leg_complete[,-c(7:8)]
 order <- c("official_full_name","bioguide_id","party","type","state",
            "birthday_bio","gender_bio","religion_bio")
-leg1 <- leg1[,order]
-leg_complete %>% leg1
+leg_complete <- leg_complete[,order]
+leg_complete %>% leg_complete
   rename(
     c(name = "official_full_name",
     id = "bioguide_id",
