@@ -1,0 +1,20 @@
+library(stats)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+library(ggcorrplot)
+
+prop <- with(leg_state, table(gender, political_party)) %>%
+    prop.table()
+    prop()
+data.table(prop)
+corr <- round(cor(prop))
+
+
+ggcorrplot(prop, hc.order=TRUE,
+           type="lower",
+           lab=TRUE,
+           lab_size=3,
+           method="circle",
+           colors=c("tomato2", "white", "springgreen3"),
+           ggtheme=theme_bw)
